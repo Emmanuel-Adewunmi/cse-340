@@ -1,43 +1,59 @@
-/* --- MOBILE STYLES (Default) --- */
+/* --- MOBILE FIRST --- */
 * { box-sizing: border-box; }
-body { font-family: sans-serif; margin: 0; padding: 10px; }
+body { 
+    font-family: sans-serif; 
+    margin: 0; 
+    padding: 0; 
+}
 
-#wrapper { max-width: 100%; margin: 0 auto; }
+/* On mobile, we keep a clean white background */
+#wrapper { 
+    width: 100%; 
+    background-color: #fff; 
+    padding: 10px; 
+}
 
-/* Navigation */
+/* Nav & Hero */
 nav ul { display: flex; list-style: none; padding: 0; background-color: #333; justify-content: space-around; }
-nav a { color: white; text-decoration: none; padding: 10px; display: block; }
+nav a { color: white; text-decoration: none; padding: 15px 5px; display: block; }
 
-/* Hero Section */
-.hero-container { position: relative; display: flex; flex-direction: column; align-items: center; }
+.hero-container { position: relative; }
 .hero-text { 
     position: absolute; top: 10px; left: 10px; 
-    background-color: rgba(255,255,255,0.8); 
-    padding: 10px; color: #00A3DA; z-index: 1; 
+    background-color: rgba(255, 255, 255, 0.85); 
+    padding: 10px; color: #00A3DA; z-index: 5;
 }
 .hero-container img { width: 100%; height: auto; }
-.hero-text button { background-color: #00A3DA; border: none; padding: 10px 20px; font-weight: bold; }
+.hero-btn { background-color: #00A3DA; border: none; padding: 10px 20px; font-weight: bold; }
 
-/* Upgrades Grid */
-.upgrade-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-.upgrade-card { text-align: center; }
-.upgrade-img { background-color: #00A3DA; padding: 10px; margin-bottom: 5px; }
+/* Grid Layout */
+.upgrade-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; text-align: center; }
+.upgrade-img { background-color: #00A3DA; padding: 10px; border: 1px solid #333; }
 
-/* Reviews */
-.reviews ul { padding-left: 20px; line-height: 1.8; }
-
-/* --- DESKTOP STYLES (Media Query) --- */
+/* --- LARGE SCREEN (Desktop) --- */
 @media screen and (min-width: 800px) {
-    #wrapper { 
-        max-width: 1000px; 
-        border: 10px solid #333; 
-        /* The checkerboard border effect */
-        border-image: url("/images/site/checkerboard.jpg") 30 round;
-        padding: 20px;
+    body {
+        /* The checkerboard image sits in the background of the whole page */
+        background-image: url("../images/site/checkerboard.jpg");
+        background-repeat: repeat;
+        padding: 40px 0; /* Add space so checkerboard shows at top/bottom */
     }
 
-    .flex-content { display: flex; flex-direction: row-reverse; gap: 40px; }
-    .upgrades, .reviews { width: 50%; }
+    #wrapper { 
+        max-width: 1000px; 
+        margin: 0 auto; 
+        background-color: #fff; /* Site content stays white */
+        padding: 20px;
+        /* Adds the blue border and the "shadow" effect requested */
+        border: 4px solid #00A3DA;
+        box-shadow: 0 0 20px rgba(0,0,0,0.5); 
+    }
 
-    .hero-text { top: 50px; left: 50px; font-size: 1.2rem; }
+    .flex-content { 
+        display: flex; 
+        flex-direction: row-reverse; 
+        justify-content: space-between; 
+        margin-top: 30px;
+    }
+    .upgrades, .reviews { width: 48%; }
 }
