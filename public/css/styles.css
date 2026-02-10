@@ -30,6 +30,36 @@ nav a { color: white; text-decoration: none; padding: 15px 5px; display: block; 
 .upgrade-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; text-align: center; }
 .upgrade-img { background-color: #00A3DA; padding: 10px; border: 1px solid #333; }
 
+/* --- INVENTORY CLASSIFICATION & DETAIL (Mobile) --- */
+#inv-display {
+    display: flex;
+    flex-direction: column; /* Stacked on mobile */
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+#inv-display li {
+    border: 1px solid #ccc;
+    margin-bottom: 20px;
+    padding: 10px;
+    text-align: center;
+    width: 100%;
+}
+
+#inv-display img, #detail-wrapper img {
+    max-width: 100%;
+    height: auto;
+    border: 1px solid #00A3DA; /* Matching your theme color */
+}
+
+/* For Task 1 Detail View */
+#detail-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
 /* --- LARGE SCREEN (Desktop) --- */
 @media screen and (min-width: 800px) {
     body {
@@ -56,4 +86,32 @@ nav a { color: white; text-decoration: none; padding: 15px 5px; display: block; 
         margin-top: 30px;
     }
     .upgrades, .reviews { width: 48%; }
+
+    /* Inventory Grid for Desktop */
+    #inv-display {
+        flex-direction: row; /* Side-by-side on desktop */
+        flex-wrap: wrap;
+        justify-content: space-around;
+    }
+
+    #inv-display li {
+        width: 30%; /* Three cars per row */
+        margin-bottom: 30px;
+    }
+
+    /* Task 1 Detail View: Side-by-Side */
+    #detail-wrapper {
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 40px;
+    }
+
+    #detail-wrapper img {
+        width: 50%; /* Image takes half the space */
+    }
+
+    #detail-info {
+        width: 50%; /* Text takes half the space */
+    }
+
 }
