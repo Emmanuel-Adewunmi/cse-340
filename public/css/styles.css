@@ -60,6 +60,12 @@ nav a { color: white; text-decoration: none; padding: 15px 5px; display: block; 
     gap: 20px;
 }
 
+/* Mobile: Details stack vertically */
+.detail-view #detail-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
 /* --- LARGE SCREEN (Desktop) --- */
 @media screen and (min-width: 800px) {
     body {
@@ -112,4 +118,14 @@ nav a { color: white; text-decoration: none; padding: 15px 5px; display: block; 
 
     #detail-info {
         width: 50%; /* Text takes half the space */
+    }
+
+    .detail-view #detail-wrapper {
+    flex-direction: row;
+    gap: 50px;
+    align-items: flex-start;
+  }
+  .detail-view img {
+    width: 50%; /* Image takes half the screen */
+  }
 }

@@ -26,7 +26,11 @@ app.set("layout","./layouts/layout")
  *************************/
 app.use(static)
 
+
 // Index route
+// Intentional Error Route (Task 3)
+app.get("/error", utilities.handleErrors(baseController.triggerError))
+
 app.get("/", utilities.handleErrors(baseController.buildHome)) // Activity 3 Robust Error handling
 
 //Inventory routes
@@ -36,7 +40,6 @@ app.use("/inv", inventoryRoute)
 app.use(async (req, res, next) => {
   next({status: 404, message: 'Sorry, we appear to have lost that page.'})
 })
-
 
 
 
