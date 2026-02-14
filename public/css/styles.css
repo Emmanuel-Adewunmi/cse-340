@@ -66,6 +66,154 @@ nav a { color: white; text-decoration: none; padding: 15px 5px; display: block; 
   flex-direction: column;
 }
 
+/* --- ACCOUNT LOGIN VIEW STYLES --- */
+
+/* Container for the form to keep it centered and readable */
+.login-container {
+    max-width: 450px;
+    margin: 2rem auto;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Ensure headings inside the form look clean */
+.login-container h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 1.5rem;
+}
+
+/* Label styling for readability (Criterion 1) */
+form label {
+    display: block;
+    margin-top: 15px;
+    font-weight: bold;
+    color: #444;
+}
+
+/* Input fields - Mobile First (full width) */
+form input[type="email"],
+form input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+/* Focus state for better UX */
+form input:focus {
+    outline: none;
+    border-color: #00A3DA; /* Matching your theme blue */
+    box-shadow: 0 0 5px rgba(0, 163, 218, 0.3);
+}
+
+/* Button styling using your site's primary blue */
+form button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 25px;
+    background-color: #00A3DA;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+form button:hover {
+    background-color: #333; /* Darker gray/black for hover contrast */
+}
+
+/* Sign-up link section */
+.signup-link {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 0.95rem;
+}
+
+.signup-link a {
+    color: #00A3DA;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.signup-link a:hover {
+    text-decoration: underline;
+}
+
+.registration-container {
+    max-width: 450px;
+    margin: 2rem auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: #fefefe;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.registration-container label {
+    display: block;
+    margin-top: 15px;
+    font-weight: bold;
+}
+
+.registration-container input {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.password-hint {
+    display: block;
+    font-size: 0.8rem;
+    color: #666;
+    margin-bottom: 5px;
+    line-height: 1.2;
+}
+
+.registration-container button {
+    width: 100%;
+    padding: 12px;
+    background-color: #00A3DA;
+    color: white;
+    border: none;
+    font-weight: bold;
+    margin-top: 20px;
+    cursor: pointer;
+}
+
+.password-notice {
+    background-color: #f0f8ff;
+    border-left: 5px solid #00A3DA;
+    padding: 10px;
+    margin: 5px 0;
+    font-size: 0.85rem;
+    color: #333;
+}
+
+.password-notice span {
+    display: block;
+    line-height: 1.4;
+}
+
+/* Style the invalid state to help users see errors */
+input:focus:invalid {
+    border: 2px solid red;
+}
+
+input:required:valid {
+    border: 2px solid green;
+}
+
 /* --- LARGE SCREEN (Desktop) --- */
 @media screen and (min-width: 800px) {
     body {
@@ -128,4 +276,11 @@ nav a { color: white; text-decoration: none; padding: 15px 5px; display: block; 
   .detail-view img {
     width: 50%; /* Image takes half the screen */
   }
+
+  /* Desktop Adjustment for the Container */
+
+    .login-container {
+        margin-top: 4rem;
+        padding: 40px;
+    }
 }
