@@ -13,6 +13,21 @@ body {
     padding: 10px; 
 }
 
+/* Header Tools & Links  */
+#tools {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end; 
+  gap: 15px; 
+  margin-bottom: 10px;
+}
+
+#tools a {
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 0.9rem;
+  color: #333;
+}
 /* Nav & Hero */
 nav ul { display: flex; list-style: none; padding: 0; background-color: #333; justify-content: space-around; }
 nav a { color: white; text-decoration: none; padding: 15px 5px; display: block; }
@@ -156,6 +171,36 @@ form button:hover {
     border-radius: 10px;
     background-color: #fefefe;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+/* Account Update Forms (Task 4) */
+.update-container {
+  max-width: 500px;
+  margin: 2rem auto;
+  padding: 0 10px;
+}
+
+.update-container h2 {
+  margin-top: 30px;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 5px;
+}
+
+/* Specific spacing for the two separate update forms */
+.update-container form {
+  margin-bottom: 50px; /* Separates the two forms clearly */
+  background-color: #fdfdfd;
+  padding: 20px;
+  border: 1px solid #eee;
+  border-radius: 8px;
+}
+
+/* Special styling for the password requirement info in update view */
+.update-container .password-hint {
+  background-color: #e1f5fe;
+  padding: 15px;
+  border-left: 5px solid #00A3DA;
+  margin: 10px 0;
 }
 
 .registration-container label {
@@ -351,6 +396,25 @@ form button:disabled {
     margin: 20px 0;
 }
 
+/* Task 3: Administrative Links in Account View */
+.inventory-management-section {
+  margin-top: 40px;
+  padding: 20px;
+  background-color: #fff9f9; /* Slight tint to distinguish admin area */
+  border: 2px dashed #d11d1d;
+  border-radius: 8px;
+}
+
+.inventory-management-section h3 {
+  margin-top: 0;
+  color: #d11d1d;
+}
+
+.inventory-management-section p a {
+  color: #d11d1d;
+  font-weight: bold;
+  text-decoration: underline;
+}
 /* Style for the 'Logged In' status bar  */
 .login-status {
     background-color: #e1f5fe;

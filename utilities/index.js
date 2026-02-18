@@ -122,11 +122,11 @@ Util.checkJWTToken = (req, res, next) => {
      return res.redirect("/account/login")
     }
     res.locals.accountData = accountData
-    res.locals.loggedin = 1
+    res.locals.loggedin = true
     next()
    })
  } else {
-  res.locals.loggedin = 0
+  res.locals.loggedin = false
   next()
  }
 }
@@ -144,6 +144,20 @@ Util.checkLogin = (req, res, next) => {
   } else {
     console.log("Outcome: Access Denied - Redirecting to Login")
     req.flash("notice", "Please log in.")
+    return res.redirect("/account/login")
+  }
+}
+/* ****************************************
+ * Check Account Type (Authorization)
+ * ************************************ */
+Util.checkAccountType = (req, res, next) => {
+  // Check if logged in and if account_type is Employee or Admin
+  if (res.locals.loggedin && 
+     (res.locals.accountData.account_type === "Emmployee" || 
+      res.locals.accountData.account_type === "Admin")) {
+    next()
+  } else {
+    req.flash("notice", "You do not have permission to access that resource.")
     return res.redirect("/account/login")
   }
 }
