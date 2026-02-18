@@ -39,7 +39,7 @@ validate.inventoryRules = () => {
     body("inv_year").isInt({ min: 1900, max: 2099 }).withMessage("Enter a valid year."),
     body("inv_description").notEmpty().withMessage("Description is required."),
     body("inv_price").isDecimal().withMessage("Price must be a valid number."),
-    body("inv_miles").isInt().withMessage("Miles must be a whole number."),
+    body("inv_miles").trim().isInt({ min: 1 }) .withMessage("Please provide a valid mileage (greater than 0)."),
     body("inv_color").trim().notEmpty().withMessage("Color is required.")
   ]
 }
@@ -61,4 +61,49 @@ validate.checkInventoryData = async (req, res, next) => {
   }
   next()
 }
+
+/* ******************************
+ * Check update data and return errors to edit view
+ * ***************************** */
+validate.checkUpdateData = async (req, res, next) => {
+  const {
+    inv_id,
+    inv_make,
+    inv_model,
+    inv_year,
+    inv_description,
+    inv_image,
+    inv_thumbnail,
+    inv_price,
+    inv_miles,
+    inv_color,
+    classification_id,
+  } = req.body
+  let errors = validationResult(req)
+  if (!errors.isEmpty()) {
+    let nav = await utilities.getNav()
+    const classificationSelect = await utilities.buildClassificationList(classification_id)
+    const itemName = `${inv_make} ${inv_model}`
+    res.render("inventory/edit-inventory", {
+      title: "Edit " + itemName,
+      nav,
+      classificationSelect,
+      errors,
+      inv_id,
+      inv_make,
+      inv_model,
+      inv_year,
+      inv_description,
+      inv_image,
+      inv_thumbnail,
+      inv_price,
+      inv_miles,
+      inv_color,
+      classification_id,
+    })
+    return
+  }
+  next()
+}
+
 module.exports = validate

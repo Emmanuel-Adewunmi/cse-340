@@ -296,18 +296,29 @@ form .instructions {
 form button {
   margin-top: 25px;
   padding: 12px;
-  background-color: #222;
+  background-color: #00A3DA;
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   font-size: 1.1rem;
+  font-weight: bold;
+  transition: all 0.3s ease;
 }
 
-form button:hover {
+form button:enabled:hover {
   background-color: #d11d1d;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2) ;
 }
 
+/* Disabled  button */
+form button:disabled {
+  background-color: #cccccc;
+  color: #666666;
+  cursor: not-allowed;
+  opacity: 0.7;
+  pointer-events: none; 
+}
 /* ----- Validation Errors Styling ----- */
 .notice {
   list-style-type: none;
@@ -322,6 +333,119 @@ form button:hover {
   margin-bottom: 5px;
 }
 
+/* ----- Account Management View ----- */
+.account-management {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 0 20px;
+}
+
+.account-management h2 {
+    color: #333;
+    border-bottom: 2px solid #d11d1d;
+    padding-bottom: 10px;
+}
+
+.account-management p {
+    font-size: 1.1rem;
+    margin: 20px 0;
+}
+
+/* Style for the 'Logged In' status bar  */
+.login-status {
+    background-color: #e1f5fe;
+    border: 1px solid #01579b;
+    padding: 10px;
+    border-radius: 4px;
+    display: inline-block;
+    margin-bottom: 20px;
+}
+/* ----- Account Management Styling ----- */
+.account-management {
+  padding: 20px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.account-management h2 {
+  color: #222;
+  border-bottom: 2px solid #d11d1d;
+  padding-bottom: 10px;
+}
+
+.account-management p {
+  font-size: 1.1rem;
+  margin: 15px 0;
+}
+
+/* For the 'Welcome, Name' greeting */
+.welcome-message {
+  font-weight: bold;
+  color: #3a3a3a;
+}
+
+/* Inventory Management Table Styling */
+#inventoryDisplay {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-family: sans-serif;
+}
+
+#inventoryDisplay thead {
+    background-color: #333;
+    color: #fff;
+}
+
+#inventoryDisplay th, 
+#inventoryDisplay td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+#inventoryDisplay tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+#inventoryDisplay tbody tr:hover {
+    background-color: #e9ecef;
+}
+
+/* Style the Modify/Delete Links as Buttons */
+#inventoryDisplay a {
+    text-decoration: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 0.9rem;
+    display: inline-block;
+}
+
+#inventoryDisplay a[href*="edit"] {
+    background-color: #28a745;
+    color: white;
+}
+
+#inventoryDisplay a[href*="delete"] {
+    background-color: #dc3545;
+    color: white;
+    margin-left: 5px;
+}
+
+#inventoryDisplay a:hover {
+    opacity: 0.8;
+}
+
+/*  Dropdown  easy to see */
+#classificationList {
+    display: block;
+    margin: 10px 0;
+    padding: 10px;
+    font-size: 1rem;
+    width: 100%;
+    max-width: 300px;
+}
 /* --- LARGE SCREEN (Desktop) --- */
 @media screen and (min-width: 800px) {
     body {

@@ -10,4 +10,28 @@
     <li><a href="/inv/add-classification">Add New Classification</a></li>
     <li><a href="/inv/add-inventory">Add New Vehicle</a></li>
   </ul>
+  
+  <h2>Update and Delete Inventory</h2>
+  <p>Select a classification from the list to manage existing inventory items.</p>
+
+  <label for="classificationList">Choose Classification:</label>
+  <%- classificationSelect %> 
+
+  <table id="inventoryDisplay">
+    <thead>
+        <tr>
+            <th>Vehicle Name</th>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+        </tr>
+    </thead>
+    <tbody>
+        </tbody>
+  </table>
+
+  <noscript>
+      <p>JavaScript is required to manage inventory. Please enable it to continue.</p>
+  </noscript>
 </div>
+
+<script src="../../js/inventory.js"></script>

@@ -24,14 +24,19 @@ router.post(
   utilities.handleErrors(accountController.registerAccount)
 )
 
-// Process the login attempt
+// Process the login request
 router.post(
   "/login",
   regValidate.loginRules(),
   regValidate.checkLoginData,
-  (req, res) => {
-    res.status(200).send('login process')
-  }
+  utilities.handleErrors(accountController.accountLogin)
 )
 
-  module.exports = router;
+// Route for account management, protected by checkLogin
+router.get(
+  "/", 
+  utilities.checkLogin, 
+  utilities.handleErrors(accountController.buildManagement)
+)
+
+module.exports = router;

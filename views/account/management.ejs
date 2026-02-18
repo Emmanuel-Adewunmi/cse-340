@@ -1,0 +1,8 @@
+<div class="account-management">
+  <%- messages() %>
+  <h2>Account Management </h2>
+  <% if (locals.loggedin) { %>
+    <p class="welcome-message">Welcome, <%= locals.accountData.account_firstname %></p>
+    <p>You are logged in.</p>
+  <% } %>
+</div>
