@@ -1,11 +1,30 @@
 <% if (title) { %> 
   <h1><%= title %></h1> 
 <% } else { 
-res.redirect('/') 
-   } %> 
- 
-  <%# messages() %> 
+  res.redirect('/') 
+} %> 
+
+<%- messages() %> 
 
 <div class="vehicle-detail-container"> 
   <%- grid %> 
+</div>
+
+<hr>
+
+<div class="wishlist-action-container">
+  <% if (locals.loggedin) { %>
+    <form action="/account/wishlist" method="post" class="wishlist-form">
+      <input type="hidden" name="inv_id" value="<%= vehicleData.inv_id %>">
+      <input type="hidden" name="account_id" value="<%= locals.accountData.account_id %>">
+      
+      <button type="submit" class="wishlist-btn">
+        Add to Wishlist ❤️
+      </button>
+    </form>
+  <% } else { %>
+    <p class="wishlist-login-prompt">
+      <a href="/account/login">Login</a> to add this <%= vehicleData.inv_make %> to your wishlist.
+    </p>
+  <% } %>
 </div>

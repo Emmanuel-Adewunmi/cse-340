@@ -1,0 +1,34 @@
+<% if (title) { %>
+  <h1><%= title %></h1>
+<% } %>
+
+<%- messages() %>
+
+<% if (wishlistData && wishlistData.length > 0) { %>
+  <ul id="inv-display">
+    <% wishlistData.forEach(vehicle => { %>
+      <li>
+        <a href="../../inv/detail/<%= vehicle.inv_id %>" title="View <%= vehicle.inv_make %> <%= vehicle.inv_model %> details">
+          <img src="<%= vehicle.inv_thumbnail %>" alt="Image of <%= vehicle.inv_make %> <%= vehicle.inv_model %>">
+        </a>
+        <div class="namePrice">
+          <hr>
+          <h2>
+            <a href="../../inv/detail/<%= vehicle.inv_id %>" title="View <%= vehicle.inv_make %> <%= vehicle.inv_model %> details">
+              <%= vehicle.inv_make %> <%= vehicle.inv_model %>
+            </a>
+          </h2>
+          <span>$<%= new Intl.NumberFormat('en-US').format(vehicle.inv_price) %></span>
+
+          <form action="/account/wishlist-remove" method="post" class="remove-wishlist-form">
+            <input type="hidden" name="wishlist_id" value="<%= vehicle.wishlist_id %>">
+            <button type="submit" class="remove-btn">Remove 🗑️</button>
+          </form>
+          
+        </div>
+      </li>
+    <% }) %>
+  </ul>
+<% } else { %>
+  <p class="notice">Your wishlist is currently empty. <a href="/inv/">Browse our inventory</a> to find your next dream car!</p>
+<% } %>

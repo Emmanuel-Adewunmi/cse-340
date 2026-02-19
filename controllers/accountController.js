@@ -2,6 +2,7 @@ const utilities = require("../utilities/")
 const accountModel = require("../models/account-model")
 const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken")
+const wishlistModel = require("../models/wishlist-model")
 require("dotenv").config()
 
 /* ****************************************
@@ -145,6 +146,11 @@ async function buildManagement(req, res) {
  * *************************************** */
 async function editAccountView(req, res, next) {
   const account_id = parseInt(req.params.account_id)
+  const loggedInId = res.locals.accountData.account_id
+  if (account_id !== loggedInId) {
+    req.flash("notice", "Access denied. You may only edit your own account.")
+    return res.redirect("/account/")
+  }
   let nav = await utilities.getNav()
   const accountData = await accountModel.getAccountById(account_id)
   res.render("account/update-account", {
@@ -163,6 +169,8 @@ async function editAccountView(req, res, next) {
 * *************************************** */
 async function updateAccount(req, res) {
   let nav = await utilities.getNav()
+  
+  // 1. Extract the data from the form body
   const {
     account_firstname,
     account_lastname,
@@ -170,6 +178,16 @@ async function updateAccount(req, res) {
     account_id
   } = req.body
 
+  // 2. SECURITY PATCH: Compare the ID from the form to the ID in the JWT
+  // We use res.locals.accountData which was set by our checkLogin/JWT middleware
+  const loggedInId = res.locals.accountData.account_id
+
+  if (parseInt(account_id) !== parseInt(loggedInId)) {
+    req.flash("notice", "Security Violation: You cannot update an account that does not belong to you.")
+    return res.redirect("/account/")
+  }
+
+  // 3. Proceed with the update if security check passes
   const updateResult = await accountModel.updateAccount(
     account_firstname,
     account_lastname,
@@ -180,6 +198,7 @@ async function updateAccount(req, res) {
   if (updateResult) {
     // Re-fetch the full account data to ensure we have everything for the token
     const accountData = await accountModel.getAccountById(account_id)
+    
     // Delete the password before storing in token
     delete accountData.account_password
     
@@ -202,13 +221,18 @@ async function updateAccount(req, res) {
     })
   }
 }
-
 /* ****************************************
 * Process Password Update
 * *************************************** */
 async function updatePassword(req, res) {
   let nav = await utilities.getNav()
   const { account_password, account_id } = req.body
+  const loggedInId = res.locals.accountData.account_id
+
+  if (parseInt(account_id) !== parseInt(loggedInId)) {
+    req.flash("notice", "Security Violation: You cannot change someone else's password.")
+    return res.redirect("/account/")
+  }
 
   // Hash the new password before sending to model
   let hashedPassword
@@ -241,6 +265,55 @@ async function updatePassword(req, res) {
 }
 
 /* ****************************************
+* Process Add to Wishlist
+* *************************************** */
+async function addToWishlist(req, res) {
+  const { inv_id, account_id } = req.body
+  const result = await wishlistModel.addWishlistItem(account_id, inv_id)
+
+  if (result) {
+    req.flash("notice", "Vehicle added to your wishlist!")
+    res.redirect("/account/wishlist")
+  } else {
+    req.flash("notice", "Sorry, there was an error adding that item.")
+    res.redirect("/inv/detail/" + inv_id)
+  }
+}
+
+/* ****************************************
+* Deliver Wishlist View
+* *************************************** */
+async function buildWishlist(req, res) {
+  let nav = await utilities.getNav()
+  const account_id = res.locals.accountData.account_id
+  const wishlistData = await wishlistModel.getWishlistByAccountId(account_id)
+  
+  res.render("account/wishlist", {
+    title: "My Wishlist",
+    nav,
+    errors: null,
+    wishlistData,
+  })
+}
+
+/* ****************************************
+* Process Remove from Wishlist
+* *************************************** */
+async function removeFromWishlist(req, res) {
+  const wishlist_id = parseInt(req.body.wishlist_id)
+  const result = await wishlistModel.removeWishlistItem(wishlist_id)
+
+  if (result) {
+    req.flash("notice", "Vehicle removed from your wishlist.")
+    res.redirect("/account/wishlist")
+  } else {
+    req.flash("notice", "Sorry, the item could not be removed.")
+    res.redirect("/account/wishlist")
+  }
+}
+
+
+/* ****************************************
 * Process logout
 * *************************************** */
 async function accountLogout(req, res) {
@@ -248,6 +321,6 @@ async function accountLogout(req, res) {
   res.redirect("/")
 }
 //  export function
-module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, buildManagement, editAccountView, updateAccount, updatePassword, accountLogout}
+module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, buildManagement, editAccountView, updateAccount, updatePassword, buildWishlist, addToWishlist, removeFromWishlist, accountLogout}
 
 

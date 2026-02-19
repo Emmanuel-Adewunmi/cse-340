@@ -127,13 +127,13 @@ form input:focus {
     box-shadow: 0 0 5px rgba(0, 163, 218, 0.3);
 }
 
-/* Button styling using your site's primary blue */
+/* Button styling */
 form button {
     width: 100%;
     padding: 12px;
     margin-top: 25px;
-    background-color: #00A3DA;
-    color: white;
+    background-color: #007299;
+    color: #ffffff;
     border: none;
     border-radius: 4px;
     font-size: 1.1rem;
@@ -154,7 +154,7 @@ form button:hover {
 }
 
 .signup-link a {
-    color: #00A3DA;
+    color: #007299;
     text-decoration: none;
     font-weight: bold;
 }
@@ -220,7 +220,8 @@ form button:hover {
 .password-hint {
     display: block;
     font-size: 0.8rem;
-    color: #666;
+    color: #333333;
+    font-weight: 500;
     margin-bottom: 5px;
     line-height: 1.2;
 }
@@ -228,7 +229,7 @@ form button:hover {
 .registration-container button {
     width: 100%;
     padding: 12px;
-    background-color: #00A3DA;
+    background-color: #007299;
     color: white;
     border: none;
     font-weight: bold;
@@ -341,8 +342,8 @@ form .instructions {
 form button {
   margin-top: 25px;
   padding: 12px;
-  background-color: #00A3DA;
-  color: white;
+  background-color: #007299;
+  color: #ffffff;
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -362,7 +363,6 @@ form button:disabled {
   color: #666666;
   cursor: not-allowed;
   opacity: 0.7;
-  pointer-events: none; 
 }
 /* ----- Validation Errors Styling ----- */
 .notice {
@@ -509,6 +509,61 @@ form button:disabled {
     font-size: 1rem;
     width: 100%;
     max-width: 300px;
+}
+.wishlist-action-container {
+    margin: 30px auto;
+    max-width: 600px;
+    padding: 20px;
+    text-align: center;
+    border-top: 1px solid #eee;
+}
+
+.wishlist-btn {
+    background-color: #d11d1d; /* Car red */
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transition: transform 0.2s;
+}
+
+.wishlist-btn:hover {
+    background-color: #333;
+    transform: translateY(-2px);
+}
+
+/* Wishlist Page "Remove" Button */
+.remove-wishlist-form {
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+
+.remove-btn {
+    background-color: transparent;
+    color: #666;
+    border: 1px solid #ccc;
+    padding: 6px 12px;
+    font-size: 0.85rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.remove-btn:hover {
+    background-color: #f8d7da; /* Soft red warning tint */
+    color: #721c24;
+    border-color: #f5c6cb;
+}
+
+/* Wishlist Grid Consistency */
+#inv-display li .namePrice {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 /* --- LARGE SCREEN (Desktop) --- */
 @media screen and (min-width: 800px) {

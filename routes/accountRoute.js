@@ -58,5 +58,25 @@ router.post(
   utilities.handleErrors(accountController.updatePassword)
 )
 
+// Route to process adding an item to the wishlist
+router.post(
+  "/wishlist",
+  utilities.checkLogin,
+  utilities.handleErrors(accountController.addToWishlist)
+)
+
+// Route to display the user's wishlist
+router.get(
+  "/wishlist",
+  utilities.checkLogin,
+  utilities.handleErrors(accountController.buildWishlist)
+)
+// Route to handle wish list removal 
+router.post(
+  "/wishlist-remove",
+  utilities.checkLogin,
+  utilities.handleErrors(accountController.removeFromWishlist)
+)
 router.get("/logout", utilities.handleErrors(accountController.accountLogout))
+
 module.exports = router;
